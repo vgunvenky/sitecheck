@@ -1,0 +1,45 @@
+edit the below changes:
+
+vim /etc/ssh/sshd_config
+
+PermitRootLogin prohibit-password
+PermitRootLogin no
+
+#IgnoreUserKnownHosts yes
+IgnoreUserKnownHosts yes
+
+#PasswordAuthentication yes
+PasswordAuthentication no
+
+
+su ubuntu
+
+mkdir ~/.ssh
+
+chmod 700 ~/.ssh
+
+touch ~/.ssh/authorized_keys
+
+chmod 600 ~/.ssh/authorized_keys
+
+chown ubuntu:ubuntu ~/.ssh/authorized_keys
+
+Go to your PPK file which you download in your local machine, copy the punlic key file and paste into auth key file 
+
+then restart the ssh service
+
+$ VM Import requires an Amazon S3 bucket to store your disk images, in the region where you want to import your VMs. You can create a bucket as follows, or use an existing bucket if you prefer.
+
+(Optional) To create an S3 bucket
+
+Open the Amazon S3 console at https://console.aws.amazon.com/s3/.
+
+Choose Create Bucket.
+
+In the Create a Bucket dialog box, do the following:
+
+For Bucket Name, type a name for your bucket. This name must be unique across all existing bucket names in Amazon S3. In some regions, there might be additional restrictions on bucket names. For more information, see Bucket Restrictions and Limitations in the Amazon Simple Storage Service Developer Guide.
+
+For Region, select the region that you want for your AMI.
+
+Choose Create.

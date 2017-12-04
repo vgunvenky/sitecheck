@@ -1,0 +1,31 @@
+Mysql Migration:
+
+1. Dump our mysql database:
+
+sudo mysqldump --databases <database_name> --master-data=2 --single-transaction --order-by-primary -r backup.sql -u <local_user> -p <password> 
+
+
+vendb.csjutvxsu9gs.us-west-2.rds.amazonaws.com
+
+
+CREATE USER 'root'@'vendb.csjutvxsu9gs.us-west-2.rds.amazonaws.com' IDENTIFIED BY '91vis91';
+CREATE USER 'root'@'52.41.165.38' IDENTIFIED BY '91vis91';
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'52.41.165.38' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'vendb.csjutvxsu9gs.us-west-2.rds.amazonaws.com' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+select * from mysql.user \G;
+
+GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'root'@'vendb.csjutvxsu9gs.us-west-2.rds.amazonaws.com' IDENTIFIED BY '91vis91';
+
+
+CALL mysql.rds_set_external_master ('ec2-54-69-200-13.us-west-2.compute.amazonaws.com', 3306,
+    'root', '91vis91', 'mysql-bin.000001', 154, 0);
+
+54.69.200.13
+
+CALL mysql.rds_set_external_master ('54.69.200.13', 3306, 'ven', '91vis91', 'mysql-bin.000001', 154, 0);
+
+CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
